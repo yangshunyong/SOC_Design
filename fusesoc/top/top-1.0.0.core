@@ -1,0 +1,29 @@
+CAPI=2:
+
+name : ::top:1.0.0
+description: A description of my local core
+
+filesets:
+  rtl_files:
+    files:
+      - rtl/top.v
+    file_type : verilogSource
+    depend:
+      - decoder
+      - counter
+  tb_files:
+    files:
+      - tb/top_tb.v
+    file_type : verilogSource
+
+targets:
+  default:
+    filesets: [rtl_files, tb_files]
+  sim:
+    default_tool: icarus
+    tools:
+      icarus:
+        iverilog_options:
+          - -g2012 # Use SystemVerilog-2012
+    filesets : [rtl_files, tb_files]
+    toplevel : [top_tb]

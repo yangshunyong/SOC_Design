@@ -1,0 +1,26 @@
+CAPI=2:
+
+name : ::decoder:1.0.0
+description: A description of my local core
+
+filesets:
+  rtl_files:
+    files:
+      - rtl/decoder.v
+    file_type : verilogSource
+  tb_files:
+    files:
+      - tb/decoder_tb.v
+    file_type : verilogSource
+
+targets:
+  default:
+    filesets: [rtl_files]
+  sim:
+    default_tool: icarus
+    tools:
+      icarus:
+        iverilog_options:
+          - -g2012 # Use SystemVerilog-2012
+    filesets : [rtl_files, tb_files]
+    toplevel : [decoder_tb]
